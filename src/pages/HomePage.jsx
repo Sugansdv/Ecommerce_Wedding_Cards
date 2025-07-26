@@ -9,8 +9,8 @@ import ThemeBasedInvitation from "../components/ThemeBasedInvitation";
 // import homeBg from '../assets/images/homeBg.jpg';
 import homeBg from '../assets/images/home_bg1.jpg';
 import InvitationCollections from '../components/InvitationCollections';
-import Promocard1 from '../assets/images/promocard1.jpg'
-import Promocard2 from '../assets/images/promocard2.jpg'
+import Promocard1 from '../assets/images/Promocard1.jpg'
+import Promocard2 from '../assets/images/Promocard2.jpg'
 import sale from '../assets/images/stock-clearance.jpg'
 import cardframe from '../assets/images/Card_frame.jpg'
 import { useNavigate } from "react-router-dom";
