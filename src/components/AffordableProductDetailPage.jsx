@@ -22,9 +22,9 @@ const AffordableProductDetailPage = () => {
       location: false,
     });
     const [info, setInfo] = useState({
-      date: "2025-07-28",
-      time: "18:00",
-      location: "Chennai, Tamil Nadu",
+      date: "2025-08-16",
+      time: "8:00",
+      location: "Trichy, Tamil Nadu",
     });
   
     const handleEdit = (key) => setEditing((prev) => ({ ...prev, [key]: true }));
@@ -163,37 +163,31 @@ const handleBuyNow = () => {
 
 
   <button
-    onClick={() => {
-      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  onClick={() => {
+    if (quantity < 100) {
+      alert("Minimum 100 cards are required to add to cart.");
+      return;
+    }
 
-      if (!isLoggedIn) {
-        alert("Please login to continue.");
-        return;
-      }
+    addToCart(product, quantity, mainImage, product.title);
+    localStorage.setItem(
+      "checkoutProduct",
+      JSON.stringify({
+        name: product.title,
+        sku: product.sku,
+        quantity,
+        price: product.price,
+        image: mainImage,
+      })
+    );
 
-      if (quantity < 100) {
-        alert("Minimum 100 cards are required to add to cart.");
-        return;
-      }
+    alert("Product added to cart!");
+  }}
+  className="bg-gray-200 font-semibold px-6 py-2 rounded-lg hover:bg-gray-300"
+>
+  Add to Cart
+</button>
 
-      addToCart(product, quantity, mainImage, product.title);
-      localStorage.setItem(
-        "checkoutProduct",
-        JSON.stringify({
-          name: product.title,
-          sku: product.sku,
-          quantity,
-          price: product.price,
-          image: mainImage,
-        })
-      );
-
-      alert("Product added to cart!");
-    }}
-    className="bg-gray-200 font-semibold px-6 py-2 rounded-lg hover:bg-gray-300"
-  >
-    Add to Cart
-  </button>
 </div>
 
 {/* Warning message */}
