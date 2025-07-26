@@ -4,9 +4,7 @@ import WeddingCardsSection from "../components/WeddingCardsSection";
 import InvitationCardSection from "../components/InvitationCardSection";
 import TestimonialSection from "../components/TestimonialSection";
 import HowItWorks from "../components/HowItWorks";
-import PromoCards from "../components/PromoCards";
 import ThemeBasedInvitation from "../components/ThemeBasedInvitation";
-// import homeBg from '../assets/images/homeBg.jpg';
 import homeBg from '../assets/images/home_bg1.jpg';
 import InvitationCollections from '../components/InvitationCollections';
 import Promocard1 from '../assets/images/Promocard1.jpg'

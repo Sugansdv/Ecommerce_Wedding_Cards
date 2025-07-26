@@ -17,11 +17,13 @@ import ContactUs from "./pages/ContactUs";
 import FAQ from "./pages/FAQ";
 import HowToOrder from "./pages/HowToOrder";
 import Search from "./components/Search";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
     <WishlistProvider>
       <Router>
+        <ScrollToTop />
         <Navbar />
         <Routes>
           <Route path="/" element={<HomePage />} />

@@ -12,7 +12,6 @@ export default function HinduWeddingCards() {
   const { wishlist, toggleWishlistItem } = useContext(WishlistContext);
   const navigate = useNavigate();
 
-  // ✅ Check wishlist by ID (not just title)
   const isCardWishlisted = (card) =>
     wishlist.some((item) => item.id === card.id);
 

@@ -1,5 +1,4 @@
-import React from "react";
-import { useEffect } from 'react';
+import React, { useEffect } from "react";
 import mainImage from "../assets/images/orderImage.jpg";
 import { useLocation } from "react-router-dom";
 import AnimatedTick from "../components/AnimatedTick";
@@ -7,15 +6,18 @@ import { FaUser, FaEnvelope, FaPhone, FaHome, FaShoppingBag } from "react-icons/
 
 const OrderConfirmed = () => {
   useEffect(() => {
-    document.title = ' Order Confirmation | WedKnotCraft';
+    document.title = "Order Confirmation | WedKnotCraft";
   }, []);
+
   const location = useLocation();
-  const { product, orderItems } = location.state || {};
+  const { product, orderItems, phone, address } = location.state || {};
+
   const user = JSON.parse(localStorage.getItem("loggedInUser")) || {
     email: "guest@gmail.com",
   };
 
   const products = orderItems || (product ? [product] : []);
+
   const getNameFromEmail = (email) => email.split("@")[0];
 
   const subtotal = products.reduce(
@@ -53,7 +55,7 @@ const OrderConfirmed = () => {
               Thank You! Your Order has been confirmed.
             </p>
 
-            {/* All products listed */}
+            {/* Product List */}
             {products.map((item, index) => (
               <div
                 key={index}
@@ -81,6 +83,7 @@ const OrderConfirmed = () => {
               </div>
             ))}
 
+            {/* Summary */}
             <h3 className="font-bold mb-2 text-xl">Order Summary</h3>
             <ul className="text-sm space-y-1 mb-2">
               <li className="flex justify-between font-semibold text-lg">
@@ -104,6 +107,7 @@ const OrderConfirmed = () => {
 
           {/* RIGHT COLUMN - CUSTOMER DETAILS */}
           <div className="p-4 rounded-lg shadow space-y-4">
+            {/* Customer */}
             <div>
               <h4 className="font-semibold mb-1 text-xl">Customer</h4>
               <p className="flex items-center gap-2 text-lg">
@@ -115,6 +119,7 @@ const OrderConfirmed = () => {
               </p>
             </div>
 
+            {/* Contact Info */}
             <div>
               <h4 className="font-semibold mb-1 text-xl">
                 Customer Information
@@ -123,22 +128,22 @@ const OrderConfirmed = () => {
                 <FaEnvelope /> {user.email}
               </p>
               <p className="flex items-center gap-2 text-lg">
-                <FaPhone /> +91-XXXXXXXXXX
+                <FaPhone /> {phone || "+91-XXXXXXXXXX"}
               </p>
             </div>
 
+            {/* Shipping Address */}
             <div>
               <h4 className="font-semibold mb-1 text-xl">Shipping Address</h4>
               <p className="flex items-center gap-2 text-lg">
                 <FaUser /> {getNameFromEmail(user.email)}
               </p>
               <p className="flex items-center gap-2 text-lg">
-                123 Elm Street
+                <FaHome /> {address || "123 Elm Street, Anytown, ABC 12345"}
               </p>
-              <p>Anytown, ABC 12345</p>
-              <p>Anywhere.</p>
             </div>
 
+            {/* Billing */}
             <div>
               <h4 className="font-bold mb-1 text-xl">Billing Address</h4>
               <p className="mb-1 text-lg">Same as Shipping address</p>
@@ -146,6 +151,7 @@ const OrderConfirmed = () => {
           </div>
         </div>
 
+        {/* Continue Shopping */}
         <div className="mt-6 text-center">
           <button
             onClick={() => (window.location.href = "/products")}

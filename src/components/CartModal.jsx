@@ -13,7 +13,7 @@ const CartModal = () => {
   if (!isCartModalOpen) return null;
 
   const navigate = useNavigate();
-  // Safe subtotal calculation
+  // subtotal calculation
   const subtotal = cartItems.reduce((sum, item) => {
     const quantity = item.quantity || 0;
     const price = item.price || 0;

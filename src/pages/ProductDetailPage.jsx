@@ -84,27 +84,42 @@ const ProductDetailPage = () => {
 
               {/* Quantity */}
               <div className="mt-4 flex items-center gap-4">
-                <span className="font-bold text-sm sm:text-base lg:text-lg">
-                  QTY:
-                </span>
-                <div className="flex items-center gap-3 py-2 px-2 rounded-xl bg-white">
-                  <div
-                    onClick={handleDecrease}
-                    className="bg-orange-500 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full border border-gray-400 text-lg font-bold cursor-pointer hover:bg-orange-600 text-white"
-                  >
-                    -
-                  </div>
-                  <span className="text-sm sm:text-base lg:text-lg font-medium">
-                    {quantity}
-                  </span>
-                  <div
-                    onClick={handleIncrease}
-                    className="bg-orange-500 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full border border-gray-400 text-lg font-bold cursor-pointer hover:bg-orange-600 text-white"
-                  >
-                    +
-                  </div>
-                </div>
-              </div>
+  <span className="font-bold text-sm sm:text-base lg:text-lg">
+    QTY:
+  </span>
+  <div className="flex items-center gap-3 py-2 px-2 rounded-xl bg-white">
+    {/* Decrease Button */}
+    <div
+      onClick={handleDecrease}
+      className="bg-orange-500 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full border border-gray-400 text-lg font-bold cursor-pointer hover:bg-orange-600 text-white"
+    >
+      -
+    </div>
+
+    {/* Quantity Input */}
+    <input
+      type="number"
+      min="1"
+      value={quantity}
+      onChange={(e) => {
+        const newQty = parseInt(e.target.value);
+        if (!isNaN(newQty) && newQty >= 1) {
+          setQuantity(newQty);
+        }
+      }}
+      className="w-12 sm:w-16 text-center border border-gray-300 rounded-md text-sm sm:text-base lg:text-lg font-medium"
+    />
+
+    {/* Increase Button */}
+    <div
+      onClick={handleIncrease}
+      className="bg-orange-500 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full border border-gray-400 text-lg font-bold cursor-pointer hover:bg-orange-600 text-white"
+    >
+      +
+    </div>
+  </div>
+</div>
+
 
               {/* Buttons */}
               <div className="mt-6 flex flex-col sm:flex-row gap-4">
