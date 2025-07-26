@@ -44,7 +44,7 @@ const CartModal = () => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
       <div className="bg-white w-[90%] max-w-7xl p-6 rounded-xl overflow-y-auto max-h-[80vh] relative">
-        {/* Close */}
+        {/* Close Button */}
         <button
           aria-label="Close"
           className="absolute top-4 right-4 text-black text-xl lg:text-2xl"
@@ -53,8 +53,8 @@ const CartModal = () => {
           &times;
         </button>
 
-        {/* Table */}
-        <table className="w-full text-left border-collapse text-sm lg:text-base">
+        {/* TABLE VIEW FOR DESKTOP & TABLET */}
+        <table className="w-full text-left border-collapse text-sm lg:text-base hidden md:table">
           <thead>
             <tr className="border-b border-black">
               <th>Product</th>
@@ -110,6 +110,40 @@ const CartModal = () => {
           </tfoot>
         </table>
 
+        {/* MOBILE VIEW: STACKED CARDS */}
+        <div className="block md:hidden space-y-4">
+          {cartItems.map((item) => {
+            const quantity = item.quantity || 0;
+            const price = item.price || 0;
+            const itemTotal = +(price * quantity).toFixed(2);
+            return (
+              <div key={item.id} className="border p-4 rounded-lg shadow-sm">
+                <div className="bg-orange-400 px-4 py-2 rounded-md mb-2 w-fit">
+                  <p className="font-bold text-sm">SKU: {item.sku}</p>
+                  <p className="text-xs">SN ({item.sn || item.id})</p>
+                </div>
+                <p className="text-sm">Qty: <span className="font-semibold">{quantity}</span></p>
+                <p className="text-sm">Unit Price: <span className="font-semibold">Rs.{price.toFixed(2)}</span></p>
+                <p className="text-sm">Tax: <span className="font-semibold">18%</span></p>
+                <p className="text-sm">Price: <span className="font-semibold">Rs.{itemTotal.toFixed(2)}</span></p>
+                <button
+                  className="text-red-600 font-bold text-sm mt-2 hover:underline"
+                  onClick={() => removeFromCart(item.id)}
+                >
+                  Remove
+                </button>
+              </div>
+            );
+          })}
+
+          {/* Mobile Summary */}
+          <div className="text-sm font-medium text-right space-y-1 pt-4 border-t">
+            <p>Sub Total: <span className="font-semibold">Rs.{subtotal.toFixed(2)}</span></p>
+            <p>Total Tax (18%): <span className="font-semibold">Rs.{totalTax.toFixed(2)}</span></p>
+            <p className="font-bold pt-2">Total: <span className="font-bold">Rs.{total.toFixed(2)}</span></p>
+          </div>
+        </div>
+
         {/* Warnings */}
         {!canCheckout && (
           <p className="text-center text-red-600 font-bold mt-4 text-sm lg:text-base">
@@ -123,17 +157,16 @@ const CartModal = () => {
         )}
 
         {/* Buttons */}
-        <div className="mt-6 flex justify-center gap-6">
+        <div className="mt-6 flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
           <button
-  className="bg-orange-500 hover:bg-orange-600 px-6 py-2 rounded-lg text-white font-semibold text-sm lg:text-base"
-  onClick={() => {
-    setIsCartModalOpen(false);
-    navigate("/");
-  }}
->
-  Continue Shopping
-</button>
-
+            className="bg-orange-500 hover:bg-orange-600 px-6 py-2 rounded-lg text-white font-semibold text-sm lg:text-base"
+            onClick={() => {
+              setIsCartModalOpen(false);
+              navigate("/");
+            }}
+          >
+            Continue Shopping
+          </button>
 
           <button
             disabled={!canCheckout}

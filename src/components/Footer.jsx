@@ -18,11 +18,11 @@ const Footer = () => {
                     <span className="text-style absolute hidden lg:inline top-[107px] left-[52px] text-black  text-[10px]">Wedding</span>
           <span className="text-style absolute hidden lg:inline top-[107px] left-[88px] text-[10px]">Cards</span> */}
           </div>
-          <p className="font-semibold mb-4 text-base sm:text-[17px] md:text-[18px] text-center ">
+          <p className="font-bold mb-4 text-base sm:text-[17px] md:text-[18px] text-center ">
             Largest Wedding <br />Cards Collections in <br />Chennai
           </p>
           <div className="flex items-center space-x-4 mt-2">
-            <p className="font-semibold mb-0 text-sm sm:text-base">
+            <p className="font-bold mb-0 text-sm sm:text-base">
               Follow us with
             </p>
             <div className="flex space-x-3 text-[20px] sm:text-[22px] md:text-[24px]">
@@ -38,10 +38,10 @@ const Footer = () => {
         <div>
           <h3 className="font-bold text-lg sm:text-xl mb-4">Information</h3>
           <ul className="space-y-2">
-            <li><Link to="/about-us" className="hover:underline">About Us</Link></li>
-            <li><Link to="/contact-us" className="hover:underline">Contact Us</Link></li>
-            <li><Link to="/faq" className="hover:underline">FAQ</Link></li>
-            <li><Link to="/how-to-order" className="hover:underline">How to order wedding invitation online?</Link></li>
+            <li><Link to="/about-us" className="hover:underline font-semibold">About Us</Link></li>
+            <li><Link to="/contact-us" className="hover:underline font-semibold">Contact Us</Link></li>
+            <li><Link to="/faq" className="hover:underline font-semibold">FAQ</Link></li>
+            <li><Link to="/how-to-order" className="hover:underline font-semibold">How to order wedding invitation online?</Link></li>
           </ul>
         </div>
 
@@ -49,9 +49,9 @@ const Footer = () => {
         <div>
           <h3 className="font-bold text-lg sm:text-xl mb-4">Quick Access</h3>
           <ul className="space-y-2">
-            <li><Link to="/" className="hover:underline">Home</Link></li>
-            <li><Link to="/wedding-cards" className="hover:underline">Wedding Cards</Link></li>
-            <li><Link to="/hindu-wedding-cards" className="hover:underline">Hindu Wedding Cards</Link></li>
+            <li><Link to="/" className="hover:underline font-semibold">Home</Link></li>
+            <li><Link to="/wedding-cards" className="hover:underline font-semibold">Wedding Cards</Link></li>
+            <li><Link to="/hindu-wedding-cards" className="hover:underline font-semibold">Hindu Wedding Cards</Link></li>
           </ul>
         </div>
 
@@ -60,14 +60,14 @@ const Footer = () => {
           <h3 className="font-bold text-lg sm:text-xl mb-4">Contact Us</h3>
           <div className="space-y-2">
             <div className="flex items-start gap-2">
-              <i className="bi bi-telephone"></i>
-              <span>+91 9876543210</span>
+              <i className="bi bi-telephone font-semibold"></i>
+              <span className="font-semibold">+91 9876543210</span>
             </div>
             <div className="flex items-start gap-2">
               <i className="bi bi-envelope"></i>
-              <span>wedtype@weddingcards.com</span>
+              <span className="font-semibold">wedtype@weddingcards.com</span>
             </div>
-            <p>Operating hours: 10.00Am to 10.00Pm</p>
+            <p className="font-semibold">Operating hours: 10.00Am to 10.00Pm</p>
             <p className="font-semibold">Monday - Sunday</p>
           </div>
         </div>
@@ -75,7 +75,7 @@ const Footer = () => {
 
       {/* Bottom Copyright */}
       <div className="border-t border-gray-400 mt-8 pt-4 text-center text-xs sm:text-sm md:text-base">
-        <p className="flex items-center justify-center gap-2">
+        <p className="flex items-center justify-center gap-2 font-semibold">
           <i className="bi bi-c-circle"></i>
           Wed knot craft India Private Limited. All Rights Reserved.
         </p>

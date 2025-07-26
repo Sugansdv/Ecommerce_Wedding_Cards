@@ -1,7 +1,7 @@
 .tick-container {
   position: absolute;
-  top: 68.2%;
-  left: 48.5%;
+  top: 72.2%;
+  left: 48.3%;
   transform: translate(-50%, -50%);
   width: 50px;
   height: 50px;
@@ -65,5 +65,26 @@
   }
   100% {
     stroke-dashoffset: 60;
+  }
+}
+
+
+/* Tablet (landscape & portrait): width between 768px and 1024px */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .tick-container {
+    top: 79%;
+    left: 47%;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Mobile (portrait & small devices): width below 768px */
+@media (max-width: 767px) {
+  .tick-container {
+    top: 77.5%;
+    left: 46%;
+    width: 30px;
+    height: 30px;
   }
 }
