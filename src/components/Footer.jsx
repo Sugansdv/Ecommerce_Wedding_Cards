@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom"; // ✅ Import Link
-import logo from "../assets/images/download__23_-removebg-preview.png";
+// import logo from "../assets/images/download__23_-removebg-preview.png";
+import logo from "../assets/images/logofooter.jpg";
 
 const Footer = () => {
   return (
@@ -11,11 +12,11 @@ const Footer = () => {
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
           {/* <img src={logo} alt="Logo" className="w-[120px] h-auto mb-4" /> */}
           <div className="relative ">
-                    <img src={logo} alt="Logo" className="w-[160px] h-[150px] mb-4" />
-                    <span className="text-style absolute top-[50px] left-[75px] -translate-x-1/2 text-black  text-[16px] md:top-[60px] md:left-[98px] md:text-[20px] lg:left-[80px] lg:top-[50px] lg:text-[18px]">Cherish</span>
+                    <img src={logo} alt="Logo" className="w-[200px] h-[160px] mb-4" />
+                    {/* <span className="text-style absolute top-[50px] left-[75px] -translate-x-1/2 text-black  text-[16px] md:top-[60px] md:left-[98px] md:text-[20px] lg:left-[80px] lg:top-[50px] lg:text-[18px]">Cherish</span>
                     <span className="text-style absolute top-[80px] left-[75px] -translate-x-1/2 text-black text-[12px] md:top-[90px] md:left-[98px] md:text-[20px] lg:left-[80px] lg:top-[70px] lg:text-[18px]">By</span>
                     <span className="text-style absolute hidden lg:inline top-[107px] left-[52px] text-black  text-[10px]">Wedding</span>
-          <span className="text-style absolute hidden lg:inline top-[107px] left-[88px] text-[10px]">Cards</span>
+          <span className="text-style absolute hidden lg:inline top-[107px] left-[88px] text-[10px]">Cards</span> */}
           </div>
           <p className="font-semibold mb-4 text-base sm:text-[17px] md:text-[18px] text-center ">
             Largest Wedding <br />Cards Collections in <br />Chennai

@@ -6,6 +6,7 @@ import { useCart } from "../context/CartContext";
 import RelatedCards from "../components/RelatedCards";
 import weddingRing from "../assets/images/ring1.png";
 import flower from "../assets/images/flower.png";
+import { useNavigate } from "react-router-dom";
 
 const AffordableProductDetailPage = () => {
   const { id } = useParams();
@@ -35,6 +36,38 @@ const AffordableProductDetailPage = () => {
 
   const handleIncrease = () => setQuantity((prev) => prev + 1);
   const handleDecrease = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+
+  const navigate = useNavigate();
+const [warning, setWarning] = useState("");
+
+const handleBuyNow = () => {
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  if (!user) {
+    setWarning("Please login to continue");
+    setTimeout(() => setWarning(""), 2000);
+    return;
+  }
+
+  if (quantity < 100) {
+    setWarning("Minimum 100 cards required to Buy Now");
+    setTimeout(() => setWarning(""), 2000);
+    return;
+  }
+
+  localStorage.setItem(
+    "checkoutProduct",
+    JSON.stringify({
+      name: product.title,
+      sku: product.sku,
+      quantity,
+      price: product.price,
+      image: mainImage,
+    })
+  );
+
+  navigate("/checkout", { state: { fromProductPage: true } });
+};
 
   return (
     <>
@@ -81,64 +114,94 @@ const AffordableProductDetailPage = () => {
 
               {/* Quantity */}
               <div className="mt-4 flex items-center gap-4">
-                <span className="font-bold text-sm sm:text-base lg:text-lg">QTY:</span>
-                <div className="flex items-center gap-3 py-2 px-2 rounded-xl bg-white">
-                  <div
-                    onClick={handleDecrease}
-                    className="bg-orange-500 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full border border-gray-400 text-lg font-bold cursor-pointer hover:bg-orange-600 text-white"
-                  >
-                    -
-                  </div>
-                  <span className="text-sm sm:text-base lg:text-lg font-medium">{quantity}</span>
-                  <div
-                    onClick={handleIncrease}
-                    className="bg-orange-500 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full border border-gray-400 text-lg font-bold cursor-pointer hover:bg-orange-600 text-white"
-                  >
-                    +
-                  </div>
-                </div>
-              </div>
+  <span className="font-bold text-sm sm:text-base lg:text-lg">
+    QTY:
+  </span>
+  <div className="flex items-center gap-3 py-2 px-2 rounded-xl bg-white">
+    {/* Decrease Button */}
+    <div
+      onClick={handleDecrease}
+      className="bg-orange-500 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full border border-gray-400 text-lg font-bold cursor-pointer hover:bg-orange-600 text-white"
+    >
+      -
+    </div>
+
+    {/* Quantity Input */}
+    <input
+      type="number"
+      min="1"
+      value={quantity}
+      onChange={(e) => {
+        const newQty = parseInt(e.target.value);
+        if (!isNaN(newQty) && newQty >= 1) {
+          setQuantity(newQty);
+        }
+      }}
+      className="w-12 sm:w-16 text-center border border-gray-300 rounded-md text-sm sm:text-base lg:text-lg font-medium"
+    />
+
+    {/* Increase Button */}
+    <div
+      onClick={handleIncrease}
+      className="bg-orange-500 w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center rounded-full border border-gray-400 text-lg font-bold cursor-pointer hover:bg-orange-600 text-white"
+    >
+      +
+    </div>
+  </div>
+</div>
 
               {/* Buttons */}
-                            <div className="mt-6 flex flex-col sm:flex-row gap-4">
-                              <Link
-                                to="/checkout"
-                                onClick={() =>
-                                  localStorage.setItem(
-                                    "checkoutProduct",
-                                    JSON.stringify({
-                                      name: product.title,
-                                      sku: product.sku,
-                                      quantity,
-                                      price: product.price,
-                                      image: mainImage,
-                                    })
-                                  )
-                                }
-                              >
-                                <button className="bg-orange-500 font-semibold px-6 py-2 rounded-lg shadow hover:bg-orange-600 text-base sm:text-lg lg:text-xl">
-                                  Buy Now
-                                </button>
-                              </Link>
-                               <button
-                  onClick={() => {
-                    addToCart(product, quantity, mainImage, product.title);
-                    localStorage.setItem(
-                      "checkoutProduct",
-                      JSON.stringify({
-                        name: product.title,
-                        sku: product.sku,
-                        quantity,
-                        price: product.price,
-                        image: mainImage,
-                      } )
-                    );
-                  }}
-                  className="bg-gray-200 font-semibold px-6 py-2 rounded-lg shadow hover:bg-gray-300 text-base sm:text-lg lg:text-xl"
-                >
-                  Add to Cart
-                </button>
-                            </div>
+                            {/* Buttons */}
+              <div className="mt-6 flex flex-col sm:flex-row gap-4">
+  <button
+    onClick={handleBuyNow}
+    className="bg-orange-500 font-semibold px-6 py-2 rounded-lg hover:bg-orange-600 text-white"
+  >
+    Buy Now
+  </button>
+
+
+
+  <button
+    onClick={() => {
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+      if (!isLoggedIn) {
+        alert("Please login to continue.");
+        return;
+      }
+
+      if (quantity < 100) {
+        alert("Minimum 100 cards are required to add to cart.");
+        return;
+      }
+
+      addToCart(product, quantity, mainImage, product.title);
+      localStorage.setItem(
+        "checkoutProduct",
+        JSON.stringify({
+          name: product.title,
+          sku: product.sku,
+          quantity,
+          price: product.price,
+          image: mainImage,
+        })
+      );
+
+      alert("Product added to cart!");
+    }}
+    className="bg-gray-200 font-semibold px-6 py-2 rounded-lg hover:bg-gray-300"
+  >
+    Add to Cart
+  </button>
+</div>
+
+{/* Warning message */}
+{warning && (
+  <p className="text-red-500 font-medium mt-2 transition-opacity duration-300">
+    {warning}
+  </p>
+)}
 
               {/* Variants */}
               {product.variants?.length > 0 && (

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "../assets/images/download__23_-removebg-preview.png";
+// import logo from "../assets/images/download__23_-removebg-preview.png";
+import logo from "../assets/images/logohd.jpg";
 import { useCart } from "../context/CartContext";
 import CartModal from "./CartModal";
 import { useLocation } from "react-router-dom";
@@ -48,7 +49,7 @@ const Navbar = () => {
       {/* === Top Row === */}
       <div className="flex flex-col md:flex-row flex-wrap items-center justify-between pt-3 pb-3 gap-y-6 md:gap-y-0">
         {/* === Logo Section === */}
-        <div className="relative w-[150px] md:w-[200px] h-[150px] md:h-[200px] flex justify-center md:justify-start ml-4 md:ml-20">
+        {/* <div className="relative w-[150px] md:w-[200px] h-[150px] md:h-[200px] flex justify-center md:justify-start ml-4 md:ml-20">
           <img src={logo} alt="Logo" className="w-full h-full object-contain" />
           <span className="text-style absolute top-[50px] left-[75px] -translate-x-1/2 text-black italic text-[16px] md:top-[60px] md:left-[98px] md:text-[20px] lg:left-[100px] lg:top-[70px] lg:text-[20px]">Cherish</span>
           <span className="text-style absolute top-[80px] left-[75px] -translate-x-1/2 text-black italic text-[12px] md:top-[90px] md:left-[98px] md:text-[20px] lg:left-[100px] lg:top-[95px] lg:text-[20px]">By</span>
@@ -57,7 +58,12 @@ const Navbar = () => {
           <span className="text-style absolute hidden lg:inline top-[100px] left-[290px] text-black italic text-[20px]">Craft</span>
           <span className="text-style absolute hidden lg:inline top-[150px] left-[70px] text-black italic text-[12px]">Wedding</span>
           <span className="text-style absolute hidden lg:inline top-[150px] left-[113px] text-black italic text-[12px]">Cards</span>
-        </div>
+        </div> */}
+<img
+  src={logo}
+  alt="Logo"
+  className="w-[80%] max-w-[320px] h-[200px] object-contain mx-auto md:ml-20 md:mx-0"
+/>
 
         {/* === Search + Icons + Toggle === */}
         <div className="flex flex-col sm:flex-row items-center gap-4 md:gap-16 flex-grow justify-center md:justify-end mr-4 md:mr-20 w-full md:w-auto px-4 md:px-0">

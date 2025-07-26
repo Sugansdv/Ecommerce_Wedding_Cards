@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 
@@ -10,10 +10,11 @@ const CartModal = () => {
     removeFromCart,
   } = useCart();
 
+  const navigate = useNavigate();
+  const [warning, setWarning] = useState("");
+
   if (!isCartModalOpen) return null;
 
-  const navigate = useNavigate();
-  // subtotal calculation
   const subtotal = cartItems.reduce((sum, item) => {
     const quantity = item.quantity || 0;
     const price = item.price || 0;
@@ -22,15 +23,28 @@ const CartModal = () => {
 
   const totalTax = +(subtotal * 0.18).toFixed(2);
   const total = +(subtotal + totalTax).toFixed(2);
-
   const totalQuantity = cartItems.reduce((sum, item) => sum + (item.quantity || 0), 0);
   const canCheckout = totalQuantity >= 100;
+
+  const handleCheckout = () => {
+    const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    if (!user) {
+      setWarning("Please login to continue");
+      setTimeout(() => setWarning(""), 2000);
+      return;
+    }
+
+    if (canCheckout) {
+      localStorage.setItem("checkoutCart", JSON.stringify(cartItems));
+      navigate("/checkout", { state: { fromCart: true } });
+    }
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
       <div className="bg-white w-[90%] max-w-7xl p-6 rounded-xl overflow-y-auto max-h-[80vh] relative">
-        
-        {/* Close Button */}
+        {/* Close */}
         <button
           aria-label="Close"
           className="absolute top-4 right-4 text-black text-xl lg:text-2xl"
@@ -39,7 +53,7 @@ const CartModal = () => {
           &times;
         </button>
 
-        {/* Cart Table */}
+        {/* Table */}
         <table className="w-full text-left border-collapse text-sm lg:text-base">
           <thead>
             <tr className="border-b border-black">
@@ -56,7 +70,6 @@ const CartModal = () => {
               const quantity = item.quantity || 0;
               const price = item.price || 0;
               const itemTotal = +(price * quantity).toFixed(2);
-
               return (
                 <tr key={item.id} className="border-b">
                   <td>
@@ -81,8 +94,6 @@ const CartModal = () => {
               );
             })}
           </tbody>
-
-          {/* Totals */}
           <tfoot className="text-sm lg:text-base">
             <tr>
               <td colSpan="5" className="text-right font-semibold py-4">Sub Total:</td>
@@ -99,38 +110,40 @@ const CartModal = () => {
           </tfoot>
         </table>
 
-        {/* Warning */}
+        {/* Warnings */}
         {!canCheckout && (
           <p className="text-center text-red-600 font-bold mt-4 text-sm lg:text-base">
             TO CHECKOUT PLEASE ADD MINIMUM 100 ITEMS TO THE CART
           </p>
         )}
+        {warning && (
+          <p className="text-center text-red-600 font-bold mt-2 text-sm lg:text-base">
+            {warning}
+          </p>
+        )}
 
-        {/* Action Buttons */}
+        {/* Buttons */}
         <div className="mt-6 flex justify-center gap-6">
           <button
-            className="bg-orange-500 hover:bg-orange-600 px-6 py-2 rounded-lg text-white font-semibold text-sm lg:text-base"
-            onClick={() => setIsCartModalOpen(false)}
-          >
-            Continue Shopping
-          </button>
-           <button
-  disabled={!canCheckout}
+  className="bg-orange-500 hover:bg-orange-600 px-6 py-2 rounded-lg text-white font-semibold text-sm lg:text-base"
   onClick={() => {
-    if (canCheckout) {
-      localStorage.setItem("checkoutCart", JSON.stringify(cartItems)); //  Save to localStorage
-      navigate("/checkout", { state: { fromCart: true } }); // No need to pass state
-    }
+    setIsCartModalOpen(false);
+    navigate("/");
   }}
-  className={`${
-    canCheckout ? "bg-gray-800 hover:bg-gray-900" : "bg-gray-400"
-  } px-6 py-2 rounded-lg text-white font-semibold text-sm lg:text-base`}
 >
-  Checkout
+  Continue Shopping
 </button>
 
 
-
+          <button
+            disabled={!canCheckout}
+            onClick={handleCheckout}
+            className={`${
+              canCheckout ? "bg-gray-800 hover:bg-gray-900" : "bg-gray-400"
+            } px-6 py-2 rounded-lg text-white font-semibold text-sm lg:text-base`}
+          >
+            Checkout
+          </button>
         </div>
       </div>
     </div>

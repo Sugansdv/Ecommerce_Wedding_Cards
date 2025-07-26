@@ -7,6 +7,7 @@ import { useCart } from "../context/CartContext";
 import RelatedCards from "../components/RelatedCards";
 import weddingRing from "../assets/images/ring1.png";
 import flower from "../assets/images/flower.png";
+import { useNavigate } from "react-router-dom";
 
 const ProductDetailPage = () => {
   useEffect(() => {
@@ -39,6 +40,38 @@ const ProductDetailPage = () => {
 
   const handleIncrease = () => setQuantity((prev) => prev + 1);
   const handleDecrease = () => setQuantity((prev) => (prev > 1 ? prev - 1 : 1));
+
+  const navigate = useNavigate();
+const [warning, setWarning] = useState("");
+
+const handleBuyNow = () => {
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  if (!user) {
+    setWarning("Please login to continue");
+    setTimeout(() => setWarning(""), 2000);
+    return;
+  }
+
+  if (quantity < 100) {
+    setWarning("Minimum 100 cards required to Buy Now");
+    setTimeout(() => setWarning(""), 2000);
+    return;
+  }
+
+  localStorage.setItem(
+    "checkoutProduct",
+    JSON.stringify({
+      name: product.title,
+      sku: product.sku,
+      quantity,
+      price: product.price,
+      image: mainImage,
+    })
+  );
+
+  navigate("/checkout", { state: { fromProductPage: true } });
+};
 
   return (
     <>
@@ -123,44 +156,56 @@ const ProductDetailPage = () => {
 
               {/* Buttons */}
               <div className="mt-6 flex flex-col sm:flex-row gap-4">
-                <Link
-                  to="/checkout"
-                  onClick={() =>
-                    localStorage.setItem(
-                      "checkoutProduct",
-                      JSON.stringify({
-                        name: product.title,
-                        sku: product.sku,
-                        quantity,
-                        price: product.price,
-                        image: mainImage,
-                      })
-                    )
-                  }
-                >
-                  <button className="bg-orange-500 font-semibold px-6 py-2 rounded-lg shadow hover:bg-orange-600 text-base sm:text-lg lg:text-xl">
-                    Buy Now
-                  </button>
-                </Link>
-                <button
-                  onClick={() => {
-                    addToCart(product, quantity, mainImage, product.title);
-                    localStorage.setItem(
-                      "checkoutProduct",
-                      JSON.stringify({
-                        name: product.title,
-                        sku: product.sku,
-                        quantity,
-                        price: product.price,
-                        image: mainImage,
-                      } )
-                    );
-                  }}
-                  className="bg-gray-200 font-semibold px-6 py-2 rounded-lg shadow hover:bg-gray-300 text-base sm:text-lg lg:text-xl"
-                >
-                  Add to Cart
-                </button>
-              </div>
+  <button
+    onClick={handleBuyNow}
+    className="bg-orange-500 font-semibold px-6 py-2 rounded-lg hover:bg-orange-600 text-white"
+  >
+    Buy Now
+  </button>
+
+
+
+  <button
+    onClick={() => {
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+      if (!isLoggedIn) {
+        alert("Please login to continue.");
+        return;
+      }
+
+      if (quantity < 100) {
+        alert("Minimum 100 cards are required to add to cart.");
+        return;
+      }
+
+      addToCart(product, quantity, mainImage, product.title);
+      localStorage.setItem(
+        "checkoutProduct",
+        JSON.stringify({
+          name: product.title,
+          sku: product.sku,
+          quantity,
+          price: product.price,
+          image: mainImage,
+        })
+      );
+
+      alert("Product added to cart!");
+    }}
+    className="bg-gray-200 font-semibold px-6 py-2 rounded-lg hover:bg-gray-300"
+  >
+    Add to Cart
+  </button>
+</div>
+
+{/* Warning message */}
+{warning && (
+  <p className="text-red-500 font-medium mt-2 transition-opacity duration-300">
+    {warning}
+  </p>
+)}
+
 
               {/* Variants */}
               {product.variants?.length > 0 && (
