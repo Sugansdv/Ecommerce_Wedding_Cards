@@ -18,6 +18,7 @@ import FAQ from "./pages/FAQ";
 import HowToOrder from "./pages/HowToOrder";
 import Search from "./components/Search";
 import ScrollToTop from "./components/ScrollToTop";
+import "./App.css";
 
 function App() {
   return (

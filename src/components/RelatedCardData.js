@@ -43,14 +43,20 @@ export const cards = [
     price: 25.25,
     sku: "KSN0055",
     src: ganeshaWeddingCard,
-    gallery: [ganeshaWeddingCard, blueWeddingCard],
+    gallery: [ganeshaWeddingCard, gatefoldWeddingCard, ganeshaWeddingCard, lavenderVariant],
     description:
       "Elegant Ganesha embossed design with floral prints and pastel purple envelope.\nPerfect for spiritual-themed weddings.",
     comments: "Comes with customizable inserts",
     height: "25",
     width: "19",
     weight: "90",
-    variants: [],
+     variants: [
+      {
+        id: 101,
+        title: "Lavender Variant",
+        src: lavenderVariant,
+      },
+    ],
   },
   {
     id: 3,
@@ -58,14 +64,20 @@ export const cards = [
     price: 39.45,
     sku: "KSN0056",
     src: favourBoxCard,
-    gallery: [favourBoxCard],
+    gallery: [favourBoxCard, gatefoldWeddingCard, ganeshaWeddingCard, lavenderVariant],
     description:
       "Royal pink square card with embossed mandala patterns and favour box presentation.",
     comments: "Available in bulk gifting packs",
     height: "20",
     width: "20",
     weight: "150",
-    variants: [],
+     variants: [
+      {
+        id: 101,
+        title: "Lavender Variant",
+        src: lavenderVariant,
+      },
+    ],
   },
   {
     id: 4,
@@ -73,14 +85,20 @@ export const cards = [
     price: 30.0,
     sku: "KSN0057",
     src: themeWeddingCard,
-    gallery: [themeWeddingCard],
+    gallery: [themeWeddingCard, gatefoldWeddingCard, ganeshaWeddingCard, lavenderVariant],
     description:
       "Modern themed card with artistic elements and royal procession print at the bottom.",
     comments: "Good for themed wedding announcements",
     height: "27",
     width: "18",
     weight: "80",
-    variants: [],
+     variants: [
+      {
+        id: 101,
+        title: "Lavender Variant",
+        src: lavenderVariant,
+      },
+    ],
   },
   {
     id: 5,
@@ -88,14 +106,20 @@ export const cards = [
     price: 35.55,
     sku: "KSN0058",
     src: editableWeddingCard,
-    gallery: [editableWeddingCard],
+    gallery: [editableWeddingCard, gatefoldWeddingCard, ganeshaWeddingCard, lavenderVariant],
     description:
       "Traditional editable wedding card with temple border design and Om symbol.",
     comments: "Editable in Word and PDF formats",
     height: "28",
     width: "20",
     weight: "85",
-    variants: [],
+     variants: [
+      {
+        id: 101,
+        title: "Lavender Variant",
+        src: lavenderVariant,
+      },
+    ],
   },
   {
     id: 6,
@@ -103,14 +127,20 @@ export const cards = [
     price: 25.0,
     sku: "KSN0059",
     src: traditionalWeddingCard,
-    gallery: [traditionalWeddingCard],
+    gallery: [traditionalWeddingCard, gatefoldWeddingCard, ganeshaWeddingCard, lavenderVariant],
     description:
       "Scallop-edged golden red cards with classic Indian floral motifs and multiple inserts.",
     comments: "Popular in South Indian weddings",
     height: "26",
     width: "19",
     weight: "95",
-    variants: [],
+     variants: [
+      {
+        id: 101,
+        title: "Lavender Variant",
+        src: lavenderVariant,
+      },
+    ],
   },
   {
     id: 7,
@@ -118,14 +148,20 @@ export const cards = [
     price: 75.0,
     sku: "KSN0060",
     src: scrollWeddingCard,
-    gallery: [scrollWeddingCard],
+    gallery: [scrollWeddingCard, gatefoldWeddingCard, ganeshaWeddingCard, lavenderVariant],
     description:
       "Luxurious velvet scroll-style card with golden handles and printed scroll inserts.",
     comments: "Includes scroll, box, and outer envelope",
     height: "30",
     width: "10",
     weight: "180",
-    variants: [],
+     variants: [
+      {
+        id: 101,
+        title: "Lavender Variant",
+        src: lavenderVariant,
+      },
+    ],
   },
   {
     id: 8,
@@ -133,13 +169,19 @@ export const cards = [
     price: 43.2,
     sku: "KSN0061",
     src: gatefoldWeddingCard,
-    gallery: [gatefoldWeddingCard],
+    gallery: [gatefoldWeddingCard, gatefoldWeddingCard, ganeshaWeddingCard, lavenderVariant],
     description:
       "Elegant gatefold style card with laser-cut monogram and satin holder for inserts.",
     comments: "Available in multiple foil colors",
     height: "25",
     width: "22",
     weight: "120",
-    variants: [],
+     variants: [
+      {
+        id: 101,
+        title: "Lavender Variant",
+        src: lavenderVariant,
+      },
+    ],
   },
 ];

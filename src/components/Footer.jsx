@@ -5,7 +5,7 @@ import logo from "../assets/images/logofooter.jpg";
 
 const Footer = () => {
   return (
-    <footer className="bg-[#FDE5A7] text-black px-4 sm:px-6 md:px-12 lg:px-20 pt-8 pb-4 text-sm sm:text-base md:text-[16px] lg:text-[18px]">
+    <footer className="bg-[#FFE5B4] text-black px-4 sm:px-6 md:px-12 lg:px-20 pt-8 pb-4 text-sm sm:text-base md:text-[16px] lg:text-[18px]">
       {/* Top Section */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {/* Logo + Description */}
