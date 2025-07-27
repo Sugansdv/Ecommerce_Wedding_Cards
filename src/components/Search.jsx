@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import card1 from "../assets/images/card1.png";
 import card2 from "../assets/images/card2.png";
 import card3 from "../assets/images/card3.png";
@@ -24,25 +25,42 @@ const initialFilters = [
 const Search = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [filters, setFilters] = useState(initialFilters);
+  const navigate = useNavigate();
 
   const removeFilter = (filterToRemove) => {
     setFilters(filters.filter((f) => f !== filterToRemove));
   };
 
   const handleSearch = () => {
-    console.log("Search for:", searchQuery);
-    console.log("Filters:", filters);
+    const query = searchQuery.trim().toLowerCase();
+    if (query === "wedding cards" || query === "wedding card") {
+      navigate("/wedding-cards");
+    } else {
+      console.log("Search for:", searchQuery);
+    }
+  };
+
+  const handleCardClick = (img) => {
+    if (img === card1) {
+      navigate("/hindu-wedding-cards");
+    }
+  };
+
+  const handleFilterClick = (filter) => {
+    if (filter === "Wedding Cards") {
+      setSearchQuery("Wedding Cards");
+    }
   };
 
   const ideas = [card1, card2, card3, card4, card5];
   const popular = [card6, card7, card8, card9, card10, card11];
 
   return (
-    <section className="bg-[#e7e2f9] text-center py-12 px-4 md:px-10">
-      <h2 className="text-3xl md:text-3xl font-extrabold mb-2">
+    <section className="bg-[#e7e2f9] py-12 px-4 md:px-10 text-center">
+      <h2 className="text-2xl sm:text-3xl font-extrabold mb-2 hidden md:block">
         Everything You Need, to Plan your Dream Wedding
       </h2>
-      <p className=" text-lg mb-6 text-black-700 font-medium">
+      <p className="text-base sm:text-lg mb-6 text-black-700 font-medium hidden md:block">
         Search for vendors, cards, ideas and real wedding stories and more!
       </p>
 
@@ -65,29 +83,34 @@ const Search = () => {
         </div>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-3 mb-10">
+      <div className="flex flex-wrap justify-center gap-3 mb-10 hidden md:flex">
         {filters.map((filter) => (
           <span
             key={filter}
-            className="flex items-center bg-white border border-gray-300 text-sm px-3 py-1 rounded-full shadow-sm"
+            onClick={() => handleFilterClick(filter)}
+            className="flex items-center bg-white border border-gray-300 text-sm px-3 py-1 rounded-full shadow-sm cursor-pointer hover:bg-gray-100"
           >
             {filter}
             <IoClose
               className="ml-2 cursor-pointer text-gray-600 hover:text-red-500"
-              onClick={() => removeFilter(filter)}
+              onClick={(e) => {
+                e.stopPropagation();
+                removeFilter(filter);
+              }}
             />
           </span>
         ))}
       </div>
 
       <div className="text-left max-w-6xl mx-auto mb-10">
-        <h3 className="text-xl font-bold mb-4">Ideas for You</h3>
+        <h3 className="text-xl font-bold mb-4 hidden md:block">Ideas for You</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {ideas.map((img, index) => (
             <img
               key={index}
               src={img}
               alt={`Idea ${index + 1}`}
+              onClick={() => handleCardClick(img)}
               className="w-full h-[150px] object-cover rounded-lg mb-5 cursor-pointer hover:scale-105 transition-transform duration-300"
             />
           ))}
@@ -95,7 +118,7 @@ const Search = () => {
       </div>
 
       <div className="text-left max-w-6xl mx-auto">
-        <h3 className="text-xl font-bold mb-4">Popular on This</h3>
+        <h3 className="text-xl font-bold mb-4 hidden md:block">Popular on This</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {popular.map((img, index) => (
             <img
